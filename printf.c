@@ -2,21 +2,6 @@
 #include <stdarg.h>
 #include <stdlib.h>
 /**
- * _strlen - returns the length of a string
- * @s: char type string
- * Return: string length
- */
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-/**
  * _printf - produces output according to a format
  * @format: character string
  * Return: the number of characters printed
@@ -24,8 +9,7 @@ int _strlen(char *s)
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, charactercount = 0, length, j;
-	char *str, k;
+	int i = 0, charactercount = 0, j;
 	va_list print;
 
 	va_start(print, format);
@@ -33,33 +17,34 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			charactercount++;
-			_putchar(format[i]);
+			charactercount += _putchar(format[i]);
 			i++;
 		}
-		else if (format[i + 1] == 's')
+		while (format[i] == '%')
 		{
-			str = va_arg(print, char *);
-			length = _strlen(str);
-			charactercount += length;
-			for (j = 0; str[j] != '\0'; j++)
-				_putchar(str[j]);
-			i = i + 2;
+			j = charactercount;
+			if (format[i + 1] == 's')
+			{
+				charactercount += print_string(va_arg(print, char *));
+			}
+			else if (format[i + 1] == 'c')
+			{
+				charactercount += _putchar(va_arg(print, int));
+			}
+			else if (format[i + 1] == '%')
+			{
+				charactercount += _putchar('%');
+			}
+			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
+			{
+				charactercount += print_int(va_arg(print, int));
+			}
+			if (charactercount != j)
+				i = i + 2;
+			else
+				i++;
 		}
-		else if (format[i + 1] == 'c')
-		{
-			charactercount++;
-			k = va_arg(print, int);
-			_putchar(k);
-			i = i + 2;
-		}
-		else if (format[i + 1] == '%')
-		{
-			_putchar('%');
-			i = i + 2;
-		}
-		else
-			i = i + 1;
+
 	}
 	va_end(print);
 	return (charactercount);
