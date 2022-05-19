@@ -39,6 +39,10 @@ int main(void)
 	      len2 =  printf("%s", k);
 	        printf("\n");
 		  printf("%i, %d\n",  len, len2);
-	_printf("%b\n", 9874639);
+	len =_printf("%b\n", 9874639);
+
+	_printf("Length:[%i]\n", len);
+	len =  _printf("%b\n", 0);
+	_printf("Length:[%i]\n", len);
 	return (0);
 }

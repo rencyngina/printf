@@ -38,6 +38,7 @@ char *base(unsigned int n, int b)
 	ptr = malloc(_strlen("11111111111111111111111111111111") + 1);
 	for (i = 0; i < (_strlen("11111111111111111111111111111111") + 1); i++)
 		ptr[i] = '\0';
+	ptr[0] = '0';
 	i = 0;
 	while (n > 0)
 	{
