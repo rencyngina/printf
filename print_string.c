@@ -24,13 +24,10 @@ int print_string(char *str)
 {
 	int a;
 	int z;
-	char *_null = "(null)";
 
 	if (!str)
 	{
-		for (z = 0; _null[z] != '\0';  z++)
-			_putchar(_null[z]);
-		return (7);
+		str = "(null)";
 	}
 	a = _strlen(str);
 	for (z = 0; str[z] != '\0'; z++)

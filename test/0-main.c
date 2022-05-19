@@ -11,6 +11,7 @@ int main(void)
 {
 	int len;
 	int len2;
+	char *k = NULL;
 
 	len = _printf("Let's try to printf a simple sentence.\n");
 	len2 = printf("Let's try to printf a simple sentence.\n");
@@ -32,5 +33,11 @@ int main(void)
 	len2 = printf("Percent:[%%]\n");
 	_printf("Len:[%d]\n", len);
 	printf("Len:[%d]\n", len2);
+
+	len = _printf("%s", k);
+	    printf("\n");
+	      len2 =  printf("%s", k);
+	        printf("\n");
+		  printf("%i, %d\n",  len, len2);
 	return (0);
 }
