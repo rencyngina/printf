@@ -24,7 +24,7 @@ int _printf(const char *format, ...)
 			charactercount += _putchar(format[i]);
 			i++;
 		}
-		for ( ;format[i] == '%'; i = i + 2)
+		for ( ; format[i] == '%'; i = i + 2)
 		{
 			if (format[i + 1] == 's')
 				charactercount += print_string(va_arg(print, char *));
@@ -34,6 +34,8 @@ int _printf(const char *format, ...)
 				charactercount += _putchar('%');
 			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
 				charactercount += print_int(va_arg(print, int));
+			else if (format[i + 1] == 'b')
+				charactercount += bbinary(va_arg(print, unsigned int));
 			else if (format[i + 1] == ' ' && !format[i + 2])
 				return (-1);
 			else if (format[i + 1] || format[i - 1])
