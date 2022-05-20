@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	int i = 0, j, m, charactercount = 0;
-	const char f[] = "cs%dib";
+	const char f[] = "cs%dibuoXx";
 	va_list print;
 
 	va_start(print, format);

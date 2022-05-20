@@ -13,11 +13,15 @@ int (*get_specifier(char s))(va_list)
 		{'d', print_int},
 		{'i', print_int},
 		{'%', ppercent},
-		{'b', pbinary}
+		{'b', pbinary},
+		{'u', print_unsigned_int},
+		{'o', poctal},
+		{'X', pbhex},
+		{'x', pshex}
 	};
 	int i  = 0;
 
-	while (i < 6)
+	while (i < 10)
 	{
 		if (pfs[i].cs == s)
 			return (pfs[i].f);
