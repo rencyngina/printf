@@ -17,20 +17,40 @@ int _strlen(char *s)
 }
 /**
  * print_string - prints a string
- * @str: string
+ * @m: va_listfromprintf
  * Return: length of  string
  */
-int print_string(char *str)
+int print_string(va_list m)
 {
+	char *str;
 	int a;
 	int z;
 
+	str = va_arg(m, char *);
 	if (!str)
-	{
 		str = "(null)";
-	}
 	a = _strlen(str);
 	for (z = 0; str[z] != '\0'; z++)
 		_putchar(str[z]);
 	return (a);
+}
+/**
+ * print_char - prints acharacter
+ * @m: va_list from printf
+ * Return: 1
+ */
+int print_char(va_list m)
+{
+	_putchar(va_arg(m, int));
+	return (1);
+}
+/**
+ * ppercent - prints %
+ * @m: va_list from printf
+ * Return: 1
+ */
+int ppercent(va_list m)
+{
+	(void)m;
+	return (_putchar('%'));
 }

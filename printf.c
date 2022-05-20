@@ -9,7 +9,8 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, charactercount = 0;
+	int i = 0, j, m, charactercount = 0;
+	const char f[] = "cs%dib";
 	va_list print;
 
 	va_start(print, format);
@@ -26,19 +27,15 @@ int _printf(const char *format, ...)
 		}
 		for ( ; format[i] == '%'; i = i + 2)
 		{
-			if (format[i + 1] == 's')
-				charactercount += print_string(va_arg(print, char *));
-			else if (format[i + 1] == 'c')
-				charactercount += _putchar(va_arg(print, int));
-			else if (format[i + 1] == '%')
-				charactercount += _putchar('%');
-			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
-				charactercount += print_int(va_arg(print, int));
-			else if (format[i + 1] == 'b')
-				charactercount += bbinary(va_arg(print, unsigned int));
-			else if (format[i + 1] == ' ' && !format[i + 2])
+			if (format[i + 1] == ' ' && !format[i + 2])
 				return (-1);
-			else if (format[i + 1] || format[i - 1])
+			m = charactercount;
+			for (j = 0; f[j]; j++)
+			{
+				if (format[i + 1] == f[j])
+					charactercount += get_specifier(format[i + 1])(print);
+			}
+			if (m == charactercount)
 			{
 				charactercount += _putchar(format[i]);
 				charactercount += _putchar(format[i + 1]);
