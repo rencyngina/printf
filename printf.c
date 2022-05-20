@@ -9,10 +9,15 @@
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, charactercount = 0, j;
+	int i = 0, j, m, charactercount = 0;
+	const char f[] = "cs%dib";
 	va_list print;
 
 	va_start(print, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
 	while (format &&  format[i])
 	{
 		if (format[i] != '%')
@@ -20,29 +25,21 @@ int _printf(const char *format, ...)
 			charactercount += _putchar(format[i]);
 			i++;
 		}
-		while (format[i] == '%')
+		for ( ; format[i] == '%'; i = i + 2)
 		{
-			j = charactercount;
-			if (format[i + 1] == 's')
+			if (format[i + 1] == ' ' && !format[i + 2])
+				return (-1);
+			m = charactercount;
+			for (j = 0; f[j]; j++)
 			{
-				charactercount += print_string(va_arg(print, char *));
+				if (format[i + 1] == f[j])
+					charactercount += get_specifier(format[i + 1])(print);
 			}
-			else if (format[i + 1] == 'c')
+			if (m == charactercount)
 			{
-				charactercount += _putchar(va_arg(print, int));
+				charactercount += _putchar(format[i]);
+				charactercount += _putchar(format[i + 1]);
 			}
-			else if (format[i + 1] == '%')
-			{
-				charactercount += _putchar('%');
-			}
-			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
-			{
-				charactercount += print_int(va_arg(print, int));
-			}
-			if (charactercount != j)
-				i = i + 2;
-			else
-				i++;
 		}
 
 	}
