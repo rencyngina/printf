@@ -41,11 +41,12 @@ void print_number(int n)
 }
 /**
  * print_int - prints number and returns amount of digits
- * @j: integer
+ * @m: va_list  form printf
  * Return: number of digits
  */
-int print_int(int j)
+int print_int(va_list m)
 {
+	int j = va_arg(m, int);
 	int d = count_num(j);
 
 	print_number(j);
