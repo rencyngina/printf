@@ -48,3 +48,15 @@ int pshex(va_list m)
 
 	return (a);
 }
+/**
+ * pbinary - converts integer to binary
+ * @m: va_list fromprintf
+ * Return: number ofdigits
+ */
+int pbinary(va_list m)
+{
+	unsigned int k = va_arg(m, unsigned int);
+	int a = bbinary(k);
+
+	return (a);
+}
