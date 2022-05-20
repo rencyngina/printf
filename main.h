@@ -37,4 +37,7 @@ int pbinary(va_list m);
 int poctal(va_list m);
 int pbhex(va_list m);
 int pshex(va_list m);
+int _puts(char *str);
+int sbhex(unsigned int n);
+int pbigs(va_list m);
 #endif
