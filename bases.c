@@ -40,7 +40,7 @@ char *base(unsigned int n, int b)
 		ptr[i] = '\0';
 	ptr[0] = '0';
 	i = 0;
-	while (n > 0)
+	while (n != 0)
 	{
 		ptr[i] = ((n % b) + '0');
 		i++;

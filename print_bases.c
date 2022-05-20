@@ -1,4 +1,5 @@
 #include "main.h"
+#include <limits.h>
 /**
  * bbinary - converts integer to binary
  * @n: integer
@@ -6,7 +7,11 @@
  */
 int bbinary(unsigned int n)
 {
-	char *str = base(n, 2);
+	int i = 1;
 
-	return (print_string(str));
+	if (n > 1)
+		i = (1 + bbinary(n / 2));
+	_putchar((n % 2) + '0');
+
+	return (i);
 }
