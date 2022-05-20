@@ -54,3 +54,20 @@ int ppercent(va_list m)
 	(void)m;
 	return (_putchar('%'));
 }
+/**
+ * _puts - prints a string
+ * @str: pointer to string
+ * Return: length of  string
+ */
+int _puts(char *str)
+{
+	int a;
+	int z;
+
+	if (!str)
+		str = "(null)";
+	a = _strlen(str);
+	for (z = 0; str[z] != '\0'; z++)
+		_putchar(str[z]);
+	return (a);
+}

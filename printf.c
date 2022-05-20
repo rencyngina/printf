@@ -10,7 +10,7 @@
 int _printf(const char *format, ...)
 {
 	int i = 0, j, m, charactercount = 0;
-	const char f[] = "cs%dibuoXx";
+	const char f[] = "cs%dibuoXxS";
 	va_list print;
 
 	va_start(print, format);
@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
 				if (format[i + 1] == f[j])
 					charactercount += get_specifier(format[i + 1])(print);
 			}
-			if (m == charactercount)
+			if (m == charactercount && (format[i + 1] || format[i - 1]))
 			{
 				charactercount += _putchar(format[i]);
 				charactercount += _putchar(format[i + 1]);

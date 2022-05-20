@@ -17,11 +17,12 @@ int (*get_specifier(char s))(va_list)
 		{'u', print_unsigned_int},
 		{'o', poctal},
 		{'X', pbhex},
-		{'x', pshex}
+		{'x', pshex},
+		{'S', pbigs}
 	};
 	int i  = 0;
 
-	while (i < 10)
+	while (i < 11)
 	{
 		if (pfs[i].cs == s)
 			return (pfs[i].f);
