@@ -126,7 +126,7 @@ int sbhex(unsigned int n)
 	int i = 1;
 	static int j;
 
-	if (j > 1)
+	if (!n && j)
 		return (0);
 
 	if (n > 0)
@@ -134,24 +134,25 @@ int sbhex(unsigned int n)
 		j++;
 		i = (1 + sbhex(n / 16));
 	}
-	if (!j)
+	if (i == 1 && (j % 2) == 1)
 	{
 		_putchar('0');
+		j = 0;
 		i++;
 	}
-	else if (n && j && (n % 16) == 15)
+	if (n && (n % 16) == 15)
 		_putchar('F');
-	else if (n && j && (n % 16) == 14)
+	if (n && (n % 16) == 14)
 		_putchar('E');
-	else if (n && j && (n % 16) == 13)
+	if (n && (n % 16) == 13)
 		_putchar('D');
-	else if (n && j && (n % 16) == 12)
+	if (n && (n % 16) == 12)
 		_putchar('C');
-	else if (n && j && (n % 16) == 11)
+	if (n && (n % 16) == 11)
 		_putchar('B');
-	else if (n && j && (n % 16) == 10)
+	if (n && (n % 16) == 10)
 		_putchar('A');
-	else if ((n % 16) < 10)
+	if ((n % 16) < 10)
 		_putchar((n % 16) + '0');
 
 	return (i);
