@@ -27,15 +27,15 @@ int _printf(const char *format, ...)
 		}
 		for ( ; format[i] == '%'; i = i + 2)
 		{
-			if (format[i + 1] == ' ' && !format[i + 2])
-				return (-1);
 			m = charactercount;
 			for (j = 0; f[j]; j++)
 			{
 				if (format[i + 1] == f[j])
 					charactercount += get_specifier(format[i + 1])(print);
 			}
-			if (m == charactercount && (format[i + 1] || format[i - 1]))
+			if (m == charactercount && format[i + 1] == ' ' && !format[i + 2])
+				return (-1);
+			else if (m == charactercount && (format[i + 1] || format[i - 1]))
 			{
 				charactercount += _putchar(format[i]);
 				charactercount += _putchar(format[i + 1]);
