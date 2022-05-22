@@ -1,159 +1,27 @@
 #include "main.h"
-#include <limits.h>
+
 /**
- * bbinary - converts integer to binary
- * @n: unsigned int
- * Return: number ofdigits
+ * convert - converts number and base into string
+ * @num: input number
+ * @base: input base
+ * @lowercase: flag if hexa values need to be lowercase
+ * Return: result string
  */
-int bbinary(unsigned int n)
+char *convert(unsigned long int num, int base, int lowercase)
 {
-	int i = 1;
+	static char *rep;
+	static char buffer[50];
+	char *ptr;
 
-	if (n > 1)
-		i = (1 + bbinary(n / 2));
-	_putchar((n % 2) + '0');
+	rep = (lowercase)
+		? "0123456789abcdef"
+		: "0123456789ABCDEF";
+	ptr = &buffer[49];
+	*ptr = '\0';
+	do {
+		*--ptr = rep[num % base];
+		num /= base;
+	} while (num != 0);
 
-	return (i);
-}
-/**
- * ooctal - converts integer to octal
- * @n: unsigned int
- * Return: number ofdigits
- */
-int ooctal(unsigned int n)
-{
-	int i = 1;
-	static int j;
-
-	if (!n && j)
-		return (0);
-
-	if (n > 0)
-	{
-		j++;
-		i = (1 + ooctal(n / 8));
-	}
-	if (n && j)
-		_putchar((n % 8) + '0');
-	if (!j)
-		_putchar('0');
-
-	return (i);
-}
-/**
- * bhex - converts integer to hex
- * @n: unsigned int
- * Return: number ofdigits
- */
-int bhex(unsigned int n)
-{
-	int i = 1;
-	static int j;
-
-	if (!n && j)
-		return (0);
-
-	if (n > 0)
-	{
-		j++;
-		i = (1 + bhex(n / 16));
-	}
-	if (n && j && (n % 16) == 15)
-		_putchar('F');
-	if (n && j && (n % 16) == 14)
-		_putchar('E');
-	if (n && j && (n % 16) == 13)
-		_putchar('D');
-	if (n && j && (n % 16) == 12)
-		_putchar('C');
-	if (n && j && (n % 16) == 11)
-		_putchar('B');
-	if (n && j && (n % 16) == 10)
-		_putchar('A');
-	if (n && j && (n % 16) < 10)
-		_putchar((n % 16) + '0');
-
-	if (!j)
-		_putchar('0');
-
-	return (i);
-}
-/**
- * shex - converts integer to hex
- * @n: unsigned int
- * Return: number ofdigits
- */
-int shex(unsigned int n)
-{
-	int i = 1;
-	static int j;
-
-	if (!n && j)
-		return (0);
-
-	if (n > 0)
-	{
-		j++;
-		i = (1 + shex(n / 16));
-	}
-	if (n && j && (n % 16) == 15)
-		_putchar('f');
-	if (n && j && (n % 16) == 14)
-		_putchar('e');
-	if (n && j && (n % 16) == 13)
-		_putchar('d');
-	if (n && j && (n % 16) == 12)
-		_putchar('c');
-	if (n && j && (n % 16) == 11)
-		_putchar('b');
-	if (n && j && (n % 16) == 10)
-		_putchar('a');
-	if (n && j && (n % 16) < 10)
-		_putchar((n % 16) + '0');
-
-	if (!j)
-		_putchar('0');
-
-	return (i);
-}
-/**
- * sbhex - converts integer to 2 digit hex
- * @n: unsigned int
- * Return: number ofdigits
- */
-int sbhex(unsigned int n)
-{
-	int i = 1;
-	static int j;
-
-	if (!n && j)
-		return (0);
-
-	if (n > 0)
-	{
-		j++;
-		i = (1 + sbhex(n / 16));
-	}
-	if (i == 1 && (j % 2) == 1)
-	{
-		_putchar('0');
-		j = 0;
-		i++;
-	}
-	if (n && (n % 16) == 15)
-		_putchar('F');
-	if (n && (n % 16) == 14)
-		_putchar('E');
-	if (n && (n % 16) == 13)
-		_putchar('D');
-	if (n && (n % 16) == 12)
-		_putchar('C');
-	if (n && (n % 16) == 11)
-		_putchar('B');
-	if (n && (n % 16) == 10)
-		_putchar('A');
-	if ((n % 16) < 10)
-		_putchar((n % 16) + '0');
-
-	return (i);
+	return (ptr);
 }
