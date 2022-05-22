@@ -1,73 +1,34 @@
 #include "main.h"
-#include <stddef.h>
-/**
- * _strlen - returns the length of a string
- * @s: char type string
- * Return: string length
- */
-int _strlen(char *s)
-{
-	int i = 0;
 
-	while (s && s[i])
-	{
-		i++;
-	}
-	return (i);
-}
 /**
- * print_string - prints a string
- * @m: va_listfromprintf
- * Return: length of  string
+ * print_string - loops through a string and prints
+ * every character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-int print_string(va_list m)
+int print_string(va_list l, flags_t *f)
 {
-	char *str;
-	int a;
-	int z;
+	char *s = va_arg(l, char *);
 
-	str = va_arg(m, char *);
-	if (!str)
-		str = "(null)";
-	a = _strlen(str);
-	for (z = 0; str[z] != '\0'; z++)
-		_putchar(str[z]);
-	return (a);
+	(void)f;
+
+	if (!s)
+		s = "(null)";
+	return (_puts(s));
 }
+
 /**
- * print_char - prints acharacter
- * @m: va_list from printf
- * Return: 1
+ * print_char - prints a character
+ * @l: va_list arguments from _printf
+ * @f: pointer to the struct flags that determines
+ * if a flag is passed to _printf
+ * Return: number of char printed
  */
-int print_char(va_list m)
+int print_char(va_list l, flags_t *f)
 {
-	_putchar(va_arg(m, int));
+	(void)f;
+	_putchar(va_arg(l, int));
 	return (1);
-}
-/**
- * ppercent - prints %
- * @m: va_list from printf
- * Return: 1
- */
-int ppercent(va_list m)
-{
-	(void)m;
-	return (_putchar('%'));
-}
-/**
- * _puts - prints a string
- * @str: pointer to string
- * Return: length of  string
- */
-int _puts(char *str)
-{
-	int a;
-	int z;
-
-	if (!str)
-		str = "(null)";
-	a = _strlen(str);
-	for (z = 0; str[z] != '\0'; z++)
-		_putchar(str[z]);
-	return (a);
 }
