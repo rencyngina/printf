@@ -31,7 +31,10 @@ int _printf(const char *format, ...)
 			for (j = 0; f[j]; j++)
 			{
 				if (format[i + 1] == f[j])
+				{
 					charactercount += get_specifier(format[i + 1])(print);
+					break;
+				}
 			}
 			if (m == charactercount && format[i + 1] == ' ' && !format[i + 2])
 				return (-1);
