@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <stdarg.h>
 /**
- * struct flags - struct containing flags
+ * struct flags - struct containing flags to "turn on"
+ * when a flag specifier is passed to _printf()
  * @plus: flag for the '+' character
  * @space: flag for the ' ' character
  * @hash: flag for the '#' character

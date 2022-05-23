@@ -1,48 +1,43 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdlib.h>
 /**
- * _printf - produces output according to a format
- * @format: character string
- * Return: the number of characters printed
- * (excluding the null byte used to end output to strings)
+ * _printf - printf function
+ * @format: const char pointer
+ * Return: b_len
  */
 int _printf(const char *format, ...)
 {
-	int i = 0, j, m, charactercount = 0;
-	const char f[] = "cs%dibuoXxS";
-	va_list print;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-	va_start(print, format);
+	register int count = 0;
+
+	va_start(arguments, format);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	while (format &&  format[i])
+	for (p = format; *p; p++)
 	{
-		if (format[i] != '%')
+		if (*p == '%')
 		{
-			charactercount += _putchar(format[i]);
-			i++;
-		}
-		for ( ; format[i] == '%'; i = i + 2)
-		{
-			if (format[i + 1] == ' ' && !format[i + 2])
-				return (-1);
-			m = charactercount;
-			for (j = 0; f[j]; j++)
+			p++;
+			if (*p == '%')
 			{
-				if (format[i + 1] == f[j])
-					charactercount += get_specifier(format[i + 1])(print);
+				count += _putchar('%');
+				continue;
 			}
-			if (m == charactercount && (format[i + 1] || format[i - 1]))
-			{
-				charactercount += _putchar(format[i]);
-				charactercount += _putchar(format[i + 1]);
-			}
-		}
-
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	va_end(print);
-	return (charactercount);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
